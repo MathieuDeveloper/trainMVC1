@@ -6,6 +6,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using trainMVC1.Models;
+using System.Globalization;
+
+
+
 
 namespace trainMVC1.Controllers
 {
@@ -35,16 +39,39 @@ namespace trainMVC1.Controllers
         public IActionResult Calculer(LesNombres lesNombres)
         {
 
-            double number1 = Convert.ToDouble(lesNombres.InputNumber1);
-            double number2 = Convert.ToDouble(lesNombres.InputNumber2);
+
+
+
+            //decimal number;
+            //NumberStyles style;
+            //CultureInfo provider;
+
+            //// Parse string using " " as the thousands separator
+            //// and "," as the decimal separator for fr-FR culture.
+
+            //style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands;
+            //provider = new CultureInfo("en-US");
+
+            //lesNombres.InputNumber1= Decimal.Parse(Convert.ToString(lesNombres.InputNumber1), style, provider);
+            //lesNombres.InputNumber2 = Decimal.Parse(Convert.ToString(lesNombres.InputNumber2), style, provider);
+            
+            // However you always can use Invariant culture:
+            //convertedToString = dec.ToString(CultureInfo.InvariantCulture);
+
+            // This will always work because you serialized with the same culture.
+            decimal InputNumber1 = decimal.Parse(lesNombres.InputNumber1, CultureInfo.InvariantCulture);
+            decimal InputNumber2 = decimal.Parse(lesNombres.InputNumber2, CultureInfo.InvariantCulture);
+
+            double number1 = Convert.ToDouble(InputNumber1);
+            double number2 = Convert.ToDouble(InputNumber2);
             double resultMul;
             double resultDiv;
 
             resultMul = number1 * number2;
             resultDiv = number1 / number2;
 
-            lesNombres.ResultMul = Convert.ToDecimal(resultMul);
-            lesNombres.ResultDiv = Convert.ToDecimal(resultDiv);
+            lesNombres.ResultMul = Convert.ToDecimal(resultMul, CultureInfo.InvariantCulture);
+            lesNombres.ResultDiv = Convert.ToDecimal(resultDiv, CultureInfo.InvariantCulture);
 
 
             return View(lesNombres);
