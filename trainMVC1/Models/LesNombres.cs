@@ -13,5 +13,7 @@ namespace trainMVC1.Models
         public string InputNumber2 { get; set; }
         public decimal ResultMul { get; set; }
         public decimal ResultDiv { get; set; }
+
+        public string NotNumbers { get; set; }
     }
 }
