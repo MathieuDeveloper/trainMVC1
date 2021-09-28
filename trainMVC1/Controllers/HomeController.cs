@@ -59,23 +59,23 @@ namespace trainMVC1.Controllers
             // However you always can use Invariant culture:
             //convertedToString = dec.ToString(CultureInfo.InvariantCulture);
 
-         
+
+
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+            CultureInfo.CurrentUICulture = new CultureInfo("fr-FR", false);
 
 
 
 
-            new CultureInfo("");
 
 
-            decimal InputNumber1;
-            decimal InputNumber2;
-            Decimal.TryParse(lesNombres.InputNumber1, NumberStyles.Any, CultureInfo.InvariantCulture, out InputNumber1);
-            Decimal.TryParse(lesNombres.InputNumber2, NumberStyles.Any, CultureInfo.InvariantCulture, out InputNumber2);
+            decimal InputNumber1 = lesNombres.InputNumber1;
+            decimal InputNumber2 = lesNombres.InputNumber2;
+
+          
 
 
-
-            if (Decimal.TryParse(lesNombres.InputNumber1, NumberStyles.Any, CultureInfo.InvariantCulture, out InputNumber1) && Decimal.TryParse(lesNombres.InputNumber2, NumberStyles.Any, CultureInfo.InvariantCulture, out InputNumber2))
-            {
+            
                 double number1 = Convert.ToDouble(InputNumber1);
                 double number2 = Convert.ToDouble(InputNumber2);
                 double resultMul;
@@ -86,18 +86,15 @@ namespace trainMVC1.Controllers
 
 
 
-                lesNombres.ResultMul = Convert.ToDecimal(resultMul, CultureInfo.InvariantCulture);
-                lesNombres.ResultDiv = Convert.ToDecimal(resultDiv, CultureInfo.InvariantCulture);
+                lesNombres.ResultMul = Convert.ToDecimal(resultMul);
+                lesNombres.ResultDiv = Convert.ToDecimal(resultDiv);
 
                 lesNombres.ResultMul = Convert.ToDecimal(Convert.ToDouble(lesNombres.ResultMul));
 
                 return View(lesNombres);
-         }
-           else
-            {
-             lesNombres.NotNumbers = "You must enter numbers";
-               return View(lesNombres);
-         }
+         
+              
+         
         }
 
         public IActionResult Privacy()

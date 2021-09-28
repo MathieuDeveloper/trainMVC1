@@ -6,11 +6,13 @@ using System.Globalization;
 
 namespace trainMVC1.Models
 {
+    
     public class LesNombres
     {
-        public string InputNumber1 { get; set; }
         
-        public string InputNumber2 { get; set; }
+        public decimal InputNumber1 { get; set; }
+        
+        public decimal InputNumber2 { get; set; }
         public decimal ResultMul { get; set; }
         public decimal ResultDiv { get; set; }
 
